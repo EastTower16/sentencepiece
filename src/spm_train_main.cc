@@ -109,6 +109,9 @@ ABSL_FLAG(std::string, normalization_rule_name, "nmt_nfkc",
           "Choose from nfkc or identity");
 ABSL_FLAG(std::string, normalization_rule_tsv, "",
           "Normalization rule TSV file. ");
+
+ABSL_FLAG(std::string, custom_vocab_for_nonenglish_path, "",
+          "Custom nonenglish vocab paath. ");
 ABSL_FLAG(std::string, denormalization_rule_tsv, "",
           "Denormalization rule TSV file.");
 ABSL_FLAG(bool, add_dummy_prefix, kDefaultNormalizerSpec.add_dummy_prefix(),
@@ -251,6 +254,7 @@ int main(int argc, char *argv[]) {
   SetTrainerSpecFromFlag(required_chars);
   SetTrainerSpecFromFile(required_chars);
   SetTrainerSpecFromFlag(vocabulary_output_piece_score);
+  SetTrainerSpecFromFlag(custom_vocab_for_nonenglish_path);
   SetRepeatedTrainerSpecFromFlag(accept_language);
   SetRepeatedTrainerSpecFromFlag(control_symbols);
   SetRepeatedTrainerSpecFromFlag(user_defined_symbols);

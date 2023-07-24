@@ -110,7 +110,7 @@ class Trainer : public TrainerInterface {
   // break the main training loop. desired_vocab_size_ = 1.1 * vocab_size_
   // for now.
   int desired_vocab_size_;
-  absl::flat_hash_set<std::string> nonenglish_vocob_;
+  absl::flat_hash_set<::sentencepiece::string_util::UnicodeText> nonenglish_vocob_;
 };
 }  // namespace unigram
 }  // namespace sentencepiece

@@ -24,13 +24,15 @@
 #include <utility>
 #include <vector>
 
+#include "absl/container/flat_hash_map.h"
+#include "absl/memory/memory.h"
+#include "absl/strings/ascii.h"
+#include "absl/strings/str_replace.h"
+#include "absl/strings/str_split.h"
+#include "filesystem.h"
 #include "normalizer.h"
 #include "pretokenizer_for_training.h"
 #include "sentencepiece_trainer.h"
-#include "absl/container/flat_hash_map.h"
-#include "absl/memory/memory.h"
-#include "absl/strings/str_replace.h"
-#include "absl/strings/str_split.h"
 #include "third_party/esaxx/esa.hxx"  // Suffix array library.
 #include "unicode_script.h"
 #include "util.h"
@@ -242,6 +244,13 @@ TrainerModel::SentencePieces Trainer::MakeSeedSentencePiecesInternal() {
     const UnicodeText uw(begin, end);
     if (!IsValidSentencePiece(uw)) {
       continue;
+    }
+    auto s = unicode_script::GetScript(uw[0]);
+    if (s == unicode_script::U_Han || s == unicode_script::U_Hiragana ||
+        s == unicode_script::U_Katakana || uw[0] == 0x30FC) {
+      if (nonenglish_vocob_.find(uw) == nonenglish_vocob_.end()) {
+        continue;
+      }
     }
 
     // character-wise coverage is the default score.
@@ -550,7 +559,22 @@ util::Status Trainer::Train() {
   CHECK_OR_RETURN(normalizer_spec_.escape_whitespaces());
 
   TrainerModel model(trainer_spec_, normalizer_spec_);
-
+  if (!trainer_spec_.custom_vocab_for_nonenglish_path().empty()) {
+    auto rf = sentencepiece::filesystem::NewReadableFile(
+        trainer_spec_.custom_vocab_for_nonenglish_path());
+    std::string line;
+    while (rf->status().ok()) {
+      if (!rf->ReadLine(&line)) {
+        break;
+      }
+      absl::StripAsciiWhitespace(&line);
+      nonenglish_vocob_.insert(
+          ::sentencepiece::string_util::UTF8ToUnicodeText(line));
+    }
+    LOG(INFO) << "load " << nonenglish_vocob_.size()
+              << " non english words from "
+              << trainer_spec_.custom_vocab_for_nonenglish_path();
+  }
   RETURN_IF_ERROR(model.status());
   RETURN_IF_ERROR(LoadSentences());
 

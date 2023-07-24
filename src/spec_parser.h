@@ -167,6 +167,7 @@ inline std::string PrintProto(const TrainerSpec &message,
   PRINT_PARAM(enable_differential_privacy);
   PRINT_PARAM(differential_privacy_noise_level);
   PRINT_PARAM(differential_privacy_clipping_threshold);
+  PRINT_PARAM(custom_vocab_for_nonenglish_path);
 
   os << "}\n";
 
