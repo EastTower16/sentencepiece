@@ -15,7 +15,7 @@
 #ifndef CHAR_MODEL_TRAINER_H_
 #define CHAR_MODEL_TRAINER_H_
 
-#include "sentencepiece_model.pb.h"
+#include "src/sentencepiece_model.pb.h"
 #include "trainer_interface.h"
 
 namespace sentencepiece {

@@ -17,7 +17,7 @@
 
 #include <memory>
 
-#include "sentencepiece_model.pb.h"
+#include "src/sentencepiece_model.pb.h"
 #include "trainer_interface.h"
 
 namespace sentencepiece {

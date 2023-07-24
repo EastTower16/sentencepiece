@@ -234,6 +234,8 @@ message TrainerSpec {
 
   // Customized extensions: the range of field numbers
   // are open to third-party extensions.
+  // custom vocab for non-english
+  optional string custom_vocab_for_nonenglish_path = 54;
   extensions 200 to max;
 }
 

@@ -16,12 +16,12 @@
 
 #include "filesystem.h"
 #include "init.h"
-#include "sentencepiece_model.pb.h"
+#include "src/sentencepiece_model.pb.h"
 #include "sentencepiece_trainer.h"
-#include "third_party/absl/flags/flag.h"
-#include "third_party/absl/strings/ascii.h"
-#include "third_party/absl/strings/str_join.h"
-#include "third_party/absl/strings/str_split.h"
+#include "absl/flags/flag.h"
+#include "absl/strings/ascii.h"
+#include "absl/strings/str_join.h"
+#include "absl/strings/str_split.h"
 #include "util.h"
 
 using sentencepiece::NormalizerSpec;
@@ -158,6 +158,9 @@ ABSL_FLAG(float, differential_privacy_noise_level, 0.0f,
 ABSL_FLAG(std::uint64_t, differential_privacy_clipping_threshold, 0,
           "Threshold for"
           " clipping the counts for DP");
+
+ABSL_FLAG(int32, minloglevel, 0,
+          "Min log level");
 
 int main(int argc, char *argv[]) {
   sentencepiece::ScopedResourceDestructor cleaner;

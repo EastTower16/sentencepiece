@@ -20,8 +20,9 @@
 #include <utility>
 #include <vector>
 
-#include "sentencepiece_model.pb.h"
-#include "third_party/absl/strings/string_view.h"
+#include "src/sentencepiece_model.pb.h"
+#include "absl/strings/string_view.h"
+#include "absl/container/flat_hash_set.h"
 #include "trainer_interface.h"
 #include "unigram_model.h"
 #include "util.h"
@@ -109,6 +110,7 @@ class Trainer : public TrainerInterface {
   // break the main training loop. desired_vocab_size_ = 1.1 * vocab_size_
   // for now.
   int desired_vocab_size_;
+  absl::flat_hash_set<std::string> nonenglish_vocob_;
 };
 }  // namespace unigram
 }  // namespace sentencepiece
