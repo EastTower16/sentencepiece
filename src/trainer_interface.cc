@@ -22,12 +22,6 @@
 #include <utility>
 #include <vector>
 
-#include "filesystem.h"
-#include "model_factory.h"
-#include "model_interface.h"
-#include "normalizer.h"
-#include "sentencepiece_processor.h"
-#include "sentencepiece_trainer.h"
 #include "absl/container/flat_hash_map.h"
 #include "absl/memory/memory.h"
 #include "absl/random/distributions.h"
@@ -37,6 +31,12 @@
 #include "absl/strings/str_format.h"
 #include "absl/strings/str_join.h"
 #include "absl/strings/str_split.h"
+#include "filesystem.h"
+#include "model_factory.h"
+#include "model_interface.h"
+#include "normalizer.h"
+#include "sentencepiece_processor.h"
+#include "sentencepiece_trainer.h"
 #include "unicode_script.h"
 #include "util.h"
 
@@ -92,7 +92,10 @@ util::Status VerifySpec(const TrainerSpec &trainer_spec) {
 }
 
 bool is_unicode_decimal_number(char32 c) {
-  return (c >= 0x30 && c <= 0x39) || (c >= 0xff10 && c <= 0xff19);
+  return (c >= 0x30 && c <= 0x39) || (c >= 0xff10 && c <= 0xff19) ||
+         (c == 0x4e00 || c == 0x4e8c || c == 0x4e09 || c == 0x56db ||
+          c == 0x4e94 || c == 0x516d || c == 0x4e03 || c == 0x516b ||
+          c == 0x4e5d || c == 0x5341);
 }
 
 class SentenceSelector {
