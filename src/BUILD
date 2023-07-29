@@ -46,6 +46,7 @@ cc_library(
         ":normalizer",
         "@com_google_absl//absl/strings",
     ],
+    includes=["src"],
 )
 
 cc_library(
