@@ -28,7 +28,7 @@ cc_proto_library(
 
 cc_library(
     name = "common",
-    hdrs = ["common.h","config.h"],
+    srcs = ["common.h","config.h"],
     deps=[
         
     ],
