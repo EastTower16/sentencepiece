@@ -31,7 +31,8 @@ cc_library(
     hdrs = ["common.h","config.h"],
     deps=[
         
-    ]
+    ],
+    includes=["src"],
 )
 
 # https://docs.bazel.build/versions/master/be/c-cpp.html#cc_library
@@ -41,6 +42,8 @@ cc_library(
     hdrs = ["sentencepiece_processor.h"],
     deps = [
         ":common",
+        ":error",
+        ":filesystem",
         ":model_factory",
         ":sentencepiece_cc_proto",
         ":normalizer",
@@ -61,6 +64,7 @@ cc_library(
         # ":sentencepiece_processor",
         "@com_google_absl//absl/strings",
     ],
+    includes=["src"],
 )
 
 cc_library(
@@ -75,6 +79,7 @@ cc_library(
         "@com_google_absl//absl/flags:parse",
         "@com_google_protobuf//:protobuf_headers",
     ],
+    includes=["src"],
 )
 
 
@@ -92,6 +97,7 @@ cc_library(
         "@com_google_absl//absl/container:flat_hash_map",
         "//third_party/darts_clone:darts",
     ],
+    includes=["src"],
 )
 
 cc_library(
@@ -103,6 +109,7 @@ cc_library(
     deps = [
         ":model_interface",
     ],
+    includes=["src"],
 )
 
 cc_library(
@@ -114,6 +121,7 @@ cc_library(
     deps = [
         ":model_interface",
     ],
+    includes=["src"],
 )
 
 cc_library(
@@ -125,6 +133,7 @@ cc_library(
     deps = [
         ":model_interface",
     ],
+    includes=["src"],
 )
 
 cc_library(
@@ -136,6 +145,7 @@ cc_library(
     deps = [
         ":model_interface",
     ],
+    includes=["src"],
 )
 
 # https://docs.bazel.build/versions/master/be/c-cpp.html#cc_library
@@ -151,6 +161,7 @@ cc_library(
         ":unigram_model",
         ":word_model",
     ],
+    includes=["src"],
 )
 
 cc_library(
@@ -165,6 +176,7 @@ cc_library(
         ":util",
         "//third_party/darts_clone:darts",
     ],
+    includes=["src"],
 )
 
 
@@ -183,6 +195,7 @@ cc_library(
         "@com_google_absl//absl/strings",
         "//third_party/darts_clone:darts",
     ],
+    includes=["src"],
 )
 
 cc_library(
@@ -196,6 +209,7 @@ cc_library(
         ":util",
          "@com_google_absl//absl/container:flat_hash_map"
     ],
+    includes=["src"],
 )
 
 cc_library(
@@ -213,6 +227,7 @@ cc_library(
         "@com_google_absl//absl/container:flat_hash_set",
         "@com_google_absl//absl/random",
     ],
+    includes=["src"],
 )
 
 
@@ -225,6 +240,7 @@ cc_library(
     deps = [
         ":trainer_interface",
     ],
+    includes=["src"],
 )
 
 cc_library(
@@ -236,6 +252,7 @@ cc_library(
     deps = [
         ":trainer_interface",
     ],
+    includes=["src"],
 )
 
 cc_library(
@@ -248,6 +265,7 @@ cc_library(
         ":trainer_interface",
         "//third_party/esaxx:esaxx",
     ],
+    includes=["src"],
 )
 
 cc_library(
@@ -259,6 +277,7 @@ cc_library(
     deps = [
         ":trainer_interface",
     ],
+    includes=["src"],
 )
 
 
@@ -274,6 +293,7 @@ cc_library(
         ":unigram_model_trainer",
         ":word_model_trainer",
     ],
+    includes=["src"],
 )
 
 cc_library(
@@ -284,7 +304,8 @@ cc_library(
     ],
     deps=[
         ":util",
-    ]
+    ],
+    includes=["src"],
 )
 
 cc_library(
@@ -298,6 +319,7 @@ cc_library(
         ":sentencepiece_processor",
         ":sentencepiece_cc_proto",
     ],
+    includes=["src"],
 )
 
 cc_library(
@@ -315,6 +337,7 @@ cc_library(
         ":sentencepiece_cc_proto",
         ":pretokenizer_for_training",
     ],
+    includes=["src"],
 )
 
 cc_binary(
