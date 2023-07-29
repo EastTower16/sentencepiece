@@ -21,7 +21,6 @@ Makefile.in
 /missing
 /stamp-h1
 /libtool
-/config.h
 /config.status
 /autogen.sh
 /ltmain.sh
